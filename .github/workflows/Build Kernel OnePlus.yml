@@ -90,7 +90,7 @@ on:
         type: string
         description: "动态清单仓库所有者"
         required: true
-        default: "Numbersf"
+        default: "Aibeto"
       BUILD_TIME:
         type: string
         description: "自定义构建时间(输入F使用当前UTC时间)"
@@ -210,6 +210,7 @@ jobs:
           declare -A REPOS
           REPOS["OnePlusOSS"]="OnePlusOSS|kernel_manifest"
           REPOS["Appendix"]="Numbersf|Kernel_Manifest_Appendix"
+          # REPOS["Appendix"]="Aibeto|Kernel_Manifest_Appendix"
           REPOS["Dynamic"]="${DYNAMIC_REPO_INPUT}|kernel_manifest"
 
           FOUND_REPO=""
@@ -376,8 +377,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "Numbersf"
-          git config --global user.email "263623064@qq.com"
+          git config --global user.name "Aibeto"
+          git config --global user.email "tc.aibeto@outlook.com"
 
       - name: Install Dependencies + APTC
         uses: awalsh128/cache-apt-pkgs-action@latest 
@@ -655,6 +656,7 @@ jobs:
           fi
           git clone https://github.com/ShirkNeko/SukiSU_patch.git
           git clone https://github.com/Numbersf/Action-Build.git
+          # git clone https://github.com/Aibeto/Action-Build.git
           cd kernel_platform
           if [ "${{ github.event.inputs.SUSFS_META }}" != "-1" ]; then
             echo "正在拉取susfs补丁"
@@ -1113,7 +1115,8 @@ jobs:
 
       - name: Make AnyKernel3
         run: |
-          git clone https://github.com/Numbersf/AnyKernel3 --depth=1
+          # git clone https://github.com/Numbersf/AnyKernel3 --depth=1
+          git clone https://github.com/Aibeto/AnyKernel3 --depth=1
           rm -rf ./AnyKernel3/.git
           mkdir -p kernel_workspace/kernel_platform/out/Final-Image-Find/
           image_path=""
