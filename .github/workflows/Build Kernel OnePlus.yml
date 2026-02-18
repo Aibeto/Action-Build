@@ -129,7 +129,7 @@ on:
         type: boolean
         description: "是否启用网络优化算法(BBR+ECN)？"
         required: true
-        default: true
+        default: false
       UNICODE_BYPASS:
         type: boolean
         description: "是否添加Unicode不可见字码点绕过读取漏洞修复？"
