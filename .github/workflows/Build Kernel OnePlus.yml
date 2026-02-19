@@ -962,6 +962,7 @@ jobs:
         #   ./add-lxc-docker-custom3.sh $CONFIG_FILE
         #   echo "# CONFIG_ANDROID_PARANOID_NETWORK is not set" >> $CONFIG_FILE
         run: |
+          CONFIG_FILE=./arch/arm64/configs/gki_defconfig
           echo "CONFIG_NAMESPACES=y" >> $CONFIG_FILE
           echo "CONFIG_NET_NS=y" >> $CONFIG_FILE
           echo "CONFIG_PID_NS=y" >> $CONFIG_FILE
