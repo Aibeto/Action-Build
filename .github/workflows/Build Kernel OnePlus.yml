@@ -628,8 +628,9 @@ jobs:
           MANAGER_BRANCH="${{ steps.manager.outputs.manager_branch }}"
           curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/refs/heads/${MANAGER_BRANCH}/kernel/setup.sh" | bash -s dev_susfs
           cd KernelSU-Next
-          KSU_VERSION=$(expr $(curl -sI "https://api.github.com/repos/KernelSU-Next/KernelSU-Next/commits?sha=${MANAGER_BRANCH}&per_page=1" | grep -i "link:" | sed -n 's/.*page=\([0-9]*\)>; rel="last".*/\1/p') "+" 30000)
-          echo "KSUVER=$KSU_VERSION" >> $GITHUB_ENV
+          # KSU_VERSION=$(expr $(curl -sI "https://api.github.com/repos/KernelSU-Next/KernelSU-Next/commits?sha=${MANAGER_BRANCH}&per_page=1" | grep -i "link:" | sed -n 's/.*page=\([0-9]*\)>; rel="last".*/\1/p') "+" 30000)
+          # echo "KSUVER=$KSU_VERSION" >> $GITHUB_ENV
+          echo "KSUVER=looping" >> $GITHUB_ENV
           sed -i "s/KSU_VERSION_FALLBACK := 1/KSU_VERSION_FALLBACK := $KSU_VERSION/g" kernel/Kbuild
           KSU_GIT_TAG=$(curl -sL "https://api.github.com/repos/KernelSU-Next/KernelSU-Next/tags" | grep -o '"name": *"[^"]*"' | head -n 1 | sed 's/"name": "//;s/"//')
           sed -i "s/KSU_VERSION_TAG_FALLBACK := v0.0.1/KSU_VERSION_TAG_FALLBACK := $KSU_GIT_TAG/g" kernel/Kbuild
@@ -928,51 +929,51 @@ jobs:
           fi
 
           # LXC和DOCKER支持
-          echo "CONFIG_NAMESPACES=y" >> $CONFIG_FILE
-          echo "CONFIG_NET_NS=y" >> $CONFIG_FILE
-          echo "CONFIG_PID_NS=y" >> $CONFIG_FILE
-          echo "CONFIG_IPC_NS=y" >> $CONFIG_FILE
-          echo "CONFIG_UTS_NS=y" >> $CONFIG_FILE
-          echo "CONFIG_USER_NS=y" >> $CONFIG_FILE
-          echo "CONFIG_POSIX_MQUEUE=y" >> $CONFIG_FILE
-          echo "CONFIG_KEYS=y" >> $CONFIG_FILE
-          echo "CONFIG_CGROUPS=y" >> $CONFIG_FILE
-          echo "CONFIG_CGROUP_DEVICE=y" >> $CONFIG_FILE
-          echo "CONFIG_CGROUP_FREEZER=y" >> $CONFIG_FILE
-          echo "CONFIG_CGROUP_SCHED=y" >> $CONFIG_FILE
-          echo "CONFIG_CPUSETS=y" >> $CONFIG_FILE
-          echo "CONFIG_MEMCG=y" >> $CONFIG_FILE
-          echo "CONFIG_SECCOMP=y" >> $CONFIG_FILE
-          echo "CONFIG_SECCOMP_FILTER=y" >> $CONFIG_FILE
-          echo "CONFIG_SECURITY=y" >> $CONFIG_FILE
-          echo "CONFIG_SECURITY_SELINUX=y" >> $CONFIG_FILE
-          echo "CONFIG_NET=y" >> $CONFIG_FILE
-          echo "CONFIG_INET=y" >> $CONFIG_FILE
-          echo "CONFIG_NETFILTER=y" >> $CONFIG_FILE
-          echo "CONFIG_NETFILTER_XTABLES=y" >> $CONFIG_FILE
-          echo "CONFIG_NF_CONNTRACK=y" >> $CONFIG_FILE
-          echo "CONFIG_NF_NAT=y" >> $CONFIG_FILE
-          echo "CONFIG_VETH=y" >> $CONFIG_FILE
-          echo "CONFIG_BRIDGE=y" >> $CONFIG_FILE
-          echo "CONFIG_BRIDGE_NETFILTER=y" >> $CONFIG_FILE
-          echo "CONFIG_IP_NF_IPTABLES=y" >> $CONFIG_FILE
-          echo "CONFIG_IP_NF_FILTER=y" >> $CONFIG_FILE
-          echo "CONFIG_IP_NF_NAT=y" >> $CONFIG_FILE
-          echo "CONFIG_IP_NF_TARGET_MASQUERADE=y" >> $CONFIG_FILE
-          echo "CONFIG_NF_NAT_IPV4=y" >> $CONFIG_FILE
-          echo "CONFIG_NF_CONNTRACK_IPV4=y" >> $CONFIG_FILE
-          echo "CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y" >> $CONFIG_FILE
-          echo "CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y" >> $CONFIG_FILE
-          echo "CONFIG_OVERLAY_FS=y" >> $CONFIG_FILE
-          echo "CONFIG_UNIX=y" >> $CONFIG_FILE
-          echo "CONFIG_FHANDLE=y" >> $CONFIG_FILE
+          # echo "CONFIG_NAMESPACES=y" >> $CONFIG_FILE
+          # echo "CONFIG_NET_NS=y" >> $CONFIG_FILE
+          # echo "CONFIG_PID_NS=y" >> $CONFIG_FILE
+          # echo "CONFIG_IPC_NS=y" >> $CONFIG_FILE
+          # echo "CONFIG_UTS_NS=y" >> $CONFIG_FILE
+          # echo "CONFIG_USER_NS=y" >> $CONFIG_FILE
+          # echo "CONFIG_POSIX_MQUEUE=y" >> $CONFIG_FILE
+          # echo "CONFIG_KEYS=y" >> $CONFIG_FILE
+          # echo "CONFIG_CGROUPS=y" >> $CONFIG_FILE
+          # echo "CONFIG_CGROUP_DEVICE=y" >> $CONFIG_FILE
+          # echo "CONFIG_CGROUP_FREEZER=y" >> $CONFIG_FILE
+          # echo "CONFIG_CGROUP_SCHED=y" >> $CONFIG_FILE
+          # echo "CONFIG_CPUSETS=y" >> $CONFIG_FILE
+          # echo "CONFIG_MEMCG=y" >> $CONFIG_FILE
+          # echo "CONFIG_SECCOMP=y" >> $CONFIG_FILE
+          # echo "CONFIG_SECCOMP_FILTER=y" >> $CONFIG_FILE
+          # echo "CONFIG_SECURITY=y" >> $CONFIG_FILE
+          # echo "CONFIG_SECURITY_SELINUX=y" >> $CONFIG_FILE
+          # echo "CONFIG_NET=y" >> $CONFIG_FILE
+          # echo "CONFIG_INET=y" >> $CONFIG_FILE
+          # echo "CONFIG_NETFILTER=y" >> $CONFIG_FILE
+          # echo "CONFIG_NETFILTER_XTABLES=y" >> $CONFIG_FILE
+          # echo "CONFIG_NF_CONNTRACK=y" >> $CONFIG_FILE
+          # echo "CONFIG_NF_NAT=y" >> $CONFIG_FILE
+          # echo "CONFIG_VETH=y" >> $CONFIG_FILE
+          # echo "CONFIG_BRIDGE=y" >> $CONFIG_FILE
+          # echo "CONFIG_BRIDGE_NETFILTER=y" >> $CONFIG_FILE
+          # echo "CONFIG_IP_NF_IPTABLES=y" >> $CONFIG_FILE
+          # echo "CONFIG_IP_NF_FILTER=y" >> $CONFIG_FILE
+          # echo "CONFIG_IP_NF_NAT=y" >> $CONFIG_FILE
+          # echo "CONFIG_IP_NF_TARGET_MASQUERADE=y" >> $CONFIG_FILE
+          # echo "CONFIG_NF_NAT_IPV4=y" >> $CONFIG_FILE
+          # echo "CONFIG_NF_CONNTRACK_IPV4=y" >> $CONFIG_FILE
+          # echo "CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y" >> $CONFIG_FILE
+          # echo "CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y" >> $CONFIG_FILE
+          # echo "CONFIG_OVERLAY_FS=y" >> $CONFIG_FILE
+          # echo "CONFIG_UNIX=y" >> $CONFIG_FILE
+          # echo "CONFIG_FHANDLE=y" >> $CONFIG_FILE
 
-          echo "# CONFIG_ANDROID_PARANOID_NETWORK is not set" >> $CONFIG_FILE
+          # echo "# CONFIG_ANDROID_PARANOID_NETWORK is not set" >> $CONFIG_FILE
 
-          echo "# CONFIG_MODVERSIONS is not set" >> $CONFIG_FILE
-          echo "# CONFIG_MODULE_SIG is not set" >> $CONFIG_FILE
-          echo "# CONFIG_MODULE_SIG_FORCE is not set" >> $CONFIG_FILE
-          echo "CONFIG_MODULE_FORCE_LOAD=y" >> $CONFIG_FILE
+          # echo "# CONFIG_MODVERSIONS is not set" >> $CONFIG_FILE
+          # echo "# CONFIG_MODULE_SIG is not set" >> $CONFIG_FILE
+          # echo "# CONFIG_MODULE_SIG_FORCE is not set" >> $CONFIG_FILE
+          # echo "CONFIG_MODULE_FORCE_LOAD=y" >> $CONFIG_FILE
 
           # 修复构建问题
           if [ "$KERNEL_VERSION" = "6.1" ] && [[ "$CPU" == mt* ]]; then
@@ -1273,25 +1274,25 @@ jobs:
           mv oImage Image
           cp Image "${GITHUB_WORKSPACE}/AnyKernel3/Image"
 
-      - name: Download Latest SUSFS Module from CI
-        if: ${{ github.event.inputs.SUSFS_CI == 'CI' && github.event.inputs.SUSFS_META != '-1' }}
-        continue-on-error: true
-        run: |
-          LATEST_RUN_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/sidex15/susfs4ksu-module/actions/runs?status=success" | \
-            jq -r '.workflow_runs[] | select(.head_branch == "v1.5.2+") | .id' | head -n 1)
-          if [ -z "$LATEST_RUN_ID" ]; then
-            echo "No successful run found for branch v1.5.2+"
-          else
-            ARTIFACT_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              "https://api.github.com/repos/sidex15/susfs4ksu-module/actions/runs/$LATEST_RUN_ID/artifacts" | jq -r '.artifacts[0].archive_download_url')
-            if [ -n "$ARTIFACT_URL" ]; then
-              curl -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -o ksu_module_susfs_1.5.2+_CI.zip "$ARTIFACT_URL"
-              cp ksu_module_susfs_1.5.2+_CI.zip ./AnyKernel3/
-            else
-              echo "Failed to fetch artifact URL"
-            fi
-          fi
+      # - name: Download Latest SUSFS Module from CI
+      #   if: ${{ github.event.inputs.SUSFS_CI == 'CI' && github.event.inputs.SUSFS_META != '-1' }}
+      #   continue-on-error: true
+      #   run: |
+      #     LATEST_RUN_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+      #       "https://api.github.com/repos/sidex15/susfs4ksu-module/actions/runs?status=success" | \
+      #       jq -r '.workflow_runs[] | select(.head_branch == "v1.5.2+") | .id' | head -n 1)
+      #     if [ -z "$LATEST_RUN_ID" ]; then
+      #       echo "No successful run found for branch v1.5.2+"
+      #     else
+      #       ARTIFACT_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+      #         "https://api.github.com/repos/sidex15/susfs4ksu-module/actions/runs/$LATEST_RUN_ID/artifacts" | jq -r '.artifacts[0].archive_download_url')
+      #       if [ -n "$ARTIFACT_URL" ]; then
+      #         curl -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -o ksu_module_susfs_1.5.2+_CI.zip "$ARTIFACT_URL"
+      #         cp ksu_module_susfs_1.5.2+_CI.zip ./AnyKernel3/
+      #       else
+      #         echo "Failed to fetch artifact URL"
+      #       fi
+      #     fi
 
       # - name: Download Latest SUSFS Module from Release
       #   if: ${{ github.event.inputs.SUSFS_CI == 'Release' && github.event.inputs.SUSFS_META != '-1' }}
